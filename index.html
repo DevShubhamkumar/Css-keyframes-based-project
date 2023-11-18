@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock On DJ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #111;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(70%);
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(57, 30, 98, 0.5) 0%, rgba(44, 90, 122, 0.8) 100%);
+            z-index: -1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 150px 20px;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #ff4a4e;
+            animation: h1Colors 5s infinite, glow 2s infinite;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            color: #fff;
+            animation: pColors 4s infinite, glow 2s infinite;
+        }
+
+        .hero button {
+            color: white;
+            background-color: #ff4a4e;
+            border: none;
+            cursor: pointer;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: glow 2s infinite, pulsate 2s infinite;
+        }
+
+        .hero button:hover {
+            background-color: #ff6b6f;
+        }
+
+        .nav {
+            background-color: #391e62;
+            border-radius: 10px;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .smoke {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0) 100%);
+            animation: smokeAnimation 5s infinite;
+        }
+
+        @keyframes smokeAnimation {
+            0% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            animation: dance 1s infinite alternate;
+        }
+
+        .nav a:nth-child(2n) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes dance {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .button {
+            color: white;
+            background-color: #ff4a4e;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: glow 2s infinite, pulsate 2s infinite;
+        }
+
+        .button:hover {
+            background-color: #ff6b6f;
+        }
+
+        .Search {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            animation: search 1s infinite;
+            margin: 20px auto;
+            max-width: 300px;
+            z-index: 2;
+        }
+
+        .symbol {
+            text-align: center;
+            color: #ff4a4e;
+            font-size: 200px;
+            animation: sym 1s infinite, bounceAndSpin 4s infinite;
+            margin: 40px;
+            z-index: 2;
+            position: relative;
+            top: -150px;
+        }
+
+        .night-side {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .book {
+            font-size: 2rem;
+            color: #ff4a4e;
+            font-family: 'Arial', sans-serif;
+            animation: abook 1s infinite !important;
+            transition: 1s ease-in-out;
+        }
+
+        @keyframes h1Colors {
+            0% {
+                color: #fbbc05;
+            }
+
+            25% {
+                color: #f02e2d;
+            }
+
+            50% {
+                color: #3498db;
+            }
+
+            75% {
+                color: #2ecc71;
+            }
+
+            100% {
+                color: #fbbc05;
+            }
+        }
+
+        @keyframes pColors {
+            0% {
+                color: #fbbc05;
+            }
+
+            50% {
+                color: #f02e2d;
+            }
+
+            100% {
+                color: #3498db;
+            }
+        }
+
+        @keyframes glow {
+            0%,
+            100% {
+                text-shadow: 0 0 10px #fbbc05, 0 0 20px #f02e2d, 0 0 30px #3498db;
+            }
+
+            50% {
+                text-shadow: 0 0 20px #f02e2d, 0 0 30px #3498db, 0 0 40px #2ecc71;
+            }
+        }
+
+        @keyframes pulsate {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes search {
+            10% {
+                background-color: #fbbc05;
+                box-shadow: 0 0 10px #fbbc05;
+            }
+
+            20% {
+                background-color: #f02e2d;
+                box-shadow: 0 0 10px #f02e2d;
+            }
+
+            30% {
+                background-color: #3498db;
+                box-shadow: 0 0 10px #3498db;
+            }
+
+            40% {
+                background-color: #2ecc71;
+                box-shadow: 0 0 10px #2ecc71;
+            }
+        }
+
+        @keyframes sym {
+            10% {
+                color: #fbbc05;
+                transform: scale(1.2);
+            }
+
+            20% {
+                color: #f02e2d;
+                transform: scale(1.2);
+            }
+
+            30% {
+                color: #3498db;
+                transform: scale(0.9);
+            }
+
+            50% {
+                color: #2ecc71;
+                transform: scale(0.8);
+            }
+
+            60% {
+                color: #fbbc05;
+                transform: scale(0.7);
+            }
+
+            80% {
+                color: #f02e2d;
+                transform: scale(0.6);
+            }
+
+            100% {
+                color: #3498db;
+                transform: scale(0.6);
+            }
+        }
+
+        @keyframes abook {
+            10% {
+                color: #888;
+                transform: scale(1.1);
+            }
+
+            20% {
+                transform: scale(1.3);
+                color: #00f6b4;
+            }
+
+            50% {
+                transform: scale(1.2);
+                color: #6bec00;
+            }
+
+            100% {
+                transform: scale(1.1);
+                color: #f52100;
+            }
+        }
+
+        @keyframes bounceAndSpin {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            40% {
+                transform: translateY(-30px) rotate(-15deg);
+            }
+            60% {
+                transform: translateY(0) rotate(15deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gradient-overlay"></div>
+    <video id="video-background" playsinline autoplay muted loop>
+        <source src="./ink_-_67358 (Original).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero">
+        <h1>Welcome to Rock On DJ</h1>
+        <p>Your ultimate destination for rockin' music and entertainment</p>
+        <button>Contact Us</button>
+    </div>
+
+    <div class="nav">
+        <div class="smoke"></div>
+        <a class="nav_element" href="#"><button class="button">Home</button></a>
+        <a class="nav_element" href="#"><button class="button">Events</button></a>
+        <input class="Search" type="text" placeholder="Search here..">
+        <a class="nav_element" href="#"><button class="button">Gallery</button></a>
+        <a class="nav_element" href="#"><button class="button">Book Now</button></a>
+    </div>
+
+    <div class="symbol"><i class="fa-solid fa-music fa-shake"></i></div>
+
+    <div class="night-side"></div>
+
+    <audio controls autoplay loop style="display: none">
+        <source src="audio.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+</body>
+
+</html>
